@@ -3,6 +3,7 @@
 #include <fstream>
 #include "BST.h"
 #include "AVL.h"
+#include "BinaryMaxHeap.h"
 
 using namespace std;
 
@@ -106,13 +107,16 @@ int main()
 
 	//Loop through all the numbers on the 2nd line
 	//Storing them in a temporary int and then pushing them into an AVL tree each loop
-	vector<int> nums;
+	//AND storing them in a BinaryMaxHeap for Q .2
+	vector<int> nums; 
 	AVL avlQuestion1;
+	BinaryMaxHeap bmhQuestion2;
 	do
 	{
 		int temp;
 		readFile >> temp;
 		avlQuestion1.insert(new StudentNode(temp, " "));
+		bmhQuestion2.insert(StudentNode(temp, " "));
 		nums.push_back(temp); // storing in a vector to, just incase an extra " " is added at the end of the input text file
 	} while (readFile.peek() != EOF); // keep storing numbers until the end of the text file
 
@@ -135,13 +139,10 @@ int main()
 	//---------------------------------------OUTPUT----------------------------------------//
 	//-------------------------------------------------------------------------------------//
 
-	
+	//outputs the data using breadth first traversal - outputs to the debug console and
+	//                                                         the text file 
 	avlQuestion1.show(avlQuestion1.root);
 
-	
-
-
-	//-------------------------------------------------------------------------------------//
 	//-------------------------------------------------------------------------------------//
 	//-------------------------------------------------------------------------------------//
 	/*                                    ----------                                       */
@@ -150,6 +151,9 @@ int main()
 	//-------------------------------------------------------------------------------------//
 	//---------------------------------------INPUT-----------------------------------------//
 	//-------------------------------------------------------------------------------------//
+
+	//Note doesn't really care about sorting, just min parents
+	bmhQuestion2.showHeap();
 
 	system("pause");
 	return 0;
