@@ -7,7 +7,7 @@ class AVL : public BST
 {
 
 public:
-	bool displayRotations = true;
+	bool displayRotations = false;
 
 	//works out height of sub tree
 	int height(StudentNode* node);

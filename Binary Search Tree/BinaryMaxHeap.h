@@ -19,9 +19,10 @@ public:
 	void heapifyDown(int index);
 
 	void insert(StudentNode element);
+	void insertWithoutHeapify(StudentNode element);
 	void deleteMin();
 	StudentNode* extractMin();
-	void showHeap();
+	void showHeap(int firstLine);
 	int size();
 };
 

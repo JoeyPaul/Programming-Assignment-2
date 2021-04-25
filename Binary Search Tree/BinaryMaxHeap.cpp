@@ -85,6 +85,11 @@ void BinaryMaxHeap::insert(StudentNode element)
     heapifyUp(heap.size() - 1);
 }
 
+void BinaryMaxHeap::insertWithoutHeapify(StudentNode element)
+{
+    heap.push_back(element);
+}
+
 void BinaryMaxHeap::deleteMin()
 {
     //can't delete if heap is empty
@@ -112,12 +117,12 @@ StudentNode* BinaryMaxHeap::extractMin()
         return &(heap.front()); //return memory address of data at the front of the array
 }
 
-void BinaryMaxHeap::showHeap()
+void BinaryMaxHeap::showHeap(int firstLine)
 {
-    cout << "Heap -->";
+    //We don't want to overwrite what has potentially already been written to the text file
+    //so we use ios:ate and ios::app to make sure we start output at the end of what is already in the file
     ofstream writeFile;
-    writeFile.open("output-q2a2.txt");
-    
+    writeFile.open("output-q2a2.txt", ios::ate | ios::app);
     for (StudentNode s : heap)
     {
         cout << s.studentID << " ";

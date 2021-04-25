@@ -9,73 +9,6 @@ using namespace std;
 
 int main()
 {
-	BST bst1;
-	//One way to dynamically add students 
-	//StudentNode* sNodePtr = new StudentNode(123, "asads");
-	//bst1.insert(sNodePtr);
-
-	//here is a quicker way
-	bst1.insert(new StudentNode(3433, "Jeff"));
-	bst1.insert(new StudentNode(2222, "Bill"));
-	bst1.insert(new StudentNode(1221, "Trevor"));
-	bst1.insert(new StudentNode(4533, "Homie"));
-	bst1.insert(new StudentNode(3333, "Studded Bull"));
-	bst1.insert(new StudentNode(6666, "Gift From God"));
-	bst1.insert(new StudentNode(7777, "Harry"));
-	bst1.insert(new StudentNode(4343, "Marcus Von Don Son"));
-
-	cout << "try find student matching id:1221..." << endl;
-	StudentNode* sPtr = bst1.search(1221, true);
-
-	if (sPtr == NULL)
-		cout << "Cannot find a student matching that ID." << endl;
-	else cout << "Found " << sPtr->name << " with id: 1221" << endl;
-
-	//StudentNode* sPtr2 = bst1.search(-1, true);
-
-	cout << endl << "Students inorder traversal" << endl;
-	cout << "++++++++++++++++++++++++++" << endl;
-	bst1.inOrderTraversal(bst1.root);
-
-	cout << endl << "Students preorder traversal" << endl;
-	cout << "++++++++++++++++++++++++++" << endl;
-	bst1.preOrderTraversal(bst1.root);
-	
-	cout << endl << "Students postorder traversal" << endl;
-	cout << "++++++++++++++++++++++++++" << endl;
-	bst1.postOrderTraversal(bst1.root);
-
-	cout << endl << endl;
-	//----------------------------AVLTREE--------------------------------//
-	cout << "AVL" << endl;
-	cout << "===" << endl;
-	AVL avl1;
-	avl1.displayRotations = true;
-	avl1.insert(new StudentNode(2333, "Jeff"));
-	avl1.insert(new StudentNode(2222, "Bill"));
-	avl1.insert(new StudentNode(9797, "Jank"));
-	cout << "Tree height thus far: " << avl1.height(avl1.root) << endl;
-	avl1.insert(new StudentNode(4253, "Sanga"));
-	avl1.insert(new StudentNode(1912, "Ciggy"));
-	avl1.insert(new StudentNode(8545, "Geoff"));
-	avl1.insert(new StudentNode(2221, "Alabama"));
-	avl1.insert(new StudentNode(7575, "Biscuit"));
-	cout << "AVL ROOT : " << avl1.root->name << " " << avl1.root->studentID << endl;
-	cout << "Students AVL inorder traversal" << endl;
-	cout << "==============================" << endl;
-	avl1.inOrderTraversal(avl1.root);
-
-
-	cout << "try find student matching id:7575..." << endl;
-	StudentNode* sPtr2 = avl1.search(7575, true);
-	if (sPtr2 != NULL)
-		cout << "7575 " << sPtr2->name << " was found with matching ID" << endl;
-	else 
-		cout << "Cannot find id with 7575 in AVL Tree" << endl;
-
-	bst1.show(bst1.root);
-	avl1.show(avl1.root);
-
 	//-------------------------------------------------------------------------------------//
 	//-------------------------------------------------------------------------------------//
 	//-------------------------------------------------------------------------------------//
@@ -107,27 +40,29 @@ int main()
 
 	//Loop through all the numbers on the 2nd line
 	//Storing them in a temporary int and then pushing them into an AVL tree each loop
-	//AND storing them in a BinaryMaxHeap for Q .2
 	vector<int> nums; 
 	AVL avlQuestion1;
-	BinaryMaxHeap bmhQuestion2;
+	int i = 0;
 	do
 	{
 		int temp;
 		readFile >> temp;
 		avlQuestion1.insert(new StudentNode(temp, " "));
-		bmhQuestion2.insert(StudentNode(temp, " "));
-		nums.push_back(temp); // storing in a vector to, just incase an extra " " is added at the end of the input text file
-	} while (readFile.peek() != EOF); // keep storing numbers until the end of the text file
+		i++;
+	} while (i != firstLine);//(readFile.peek() != EOF); // keep storing numbers until the end of the text file
 
-	//This gets rid of a bug I was getting where it duplicated the last element of the vector if 
-	//there was a ' ' at the end of the input file
-	if (nums.size() != firstLine)
+	//Loops through the text file again storing into a vector, I was trying to solve a bug with EOF, that is why they are seperate.
+	readFile.close();
+	readFile.open("input-q1a2.txt");
+	readFile >> firstLine;
+	do
 	{
-		nums.pop_back();
-	}
+		int temp;
+		readFile >> temp;
+		nums.push_back(temp);
+	} while (readFile.peek() != EOF);
 
-	//checks for errors: line 3 doesn't match the amount on line 4
+	//checks for errors: line 1 doesn't match the amount on line 2
 	if (nums.size() != firstLine)
 	{
 		cout << "ERROR! Line 2 must have the amount of numbers specified on line 1." << endl;
@@ -149,12 +84,30 @@ int main()
 	/*                                   |    Q 2   |                                      */
 	/*                                    ----------                                       */
 	//-------------------------------------------------------------------------------------//
-	//---------------------------------------INPUT-----------------------------------------//
+	//----------------------------------INPUT-&-OUTPUT-------------------------------------//
 	//-------------------------------------------------------------------------------------//
+	
+	cout << endl << endl;
+	//Open up and read the text file again
+	readFile.open("input-q1a2.txt");
+	readFile >> firstLine; // we want to skip over the first number this time
 
-	//Note doesn't really care about sorting, just min parents
-	bmhQuestion2.showHeap();
-
+	//store all the numbers on the second line in two different heaps and print them as we go
+	//the second heap will store the same data but won't heapify the data
+	BinaryMaxHeap bmhQuestion2;
+	BinaryMaxHeap bmhNoHeapify;
+	i = 0;
+	do
+	{
+		int temp;
+		readFile >> temp;
+		bmhQuestion2.insert(StudentNode(temp, " "));
+		bmhNoHeapify.insertWithoutHeapify(StudentNode(temp, " "));
+		bmhQuestion2.showHeap(firstLine);
+		bmhNoHeapify.showHeap(firstLine);
+		i++;
+	} while (i != nums.size());//(readFile.peek() != EOF); // keep storing numbers until the end of the text file
+	readFile.close();
 	system("pause");
 	return 0;
 }

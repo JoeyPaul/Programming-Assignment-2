@@ -1,6 +1,2 @@
-﻿  BST.cpp
-  BinaryMaxHeap.cpp
-C:\Users\joeka\Documents\School Folder\Subjects\ADS\Week 7\Assessment 3 Joseph Kallman\Binary Search Tree\BinaryMaxHeap.cpp(8,19): warning C4018: '<': signed/unsigned mismatch
-C:\Users\joeka\Documents\School Folder\Subjects\ADS\Week 7\Assessment 3 Joseph Kallman\Binary Search Tree\BinaryMaxHeap.cpp(17,20): warning C4018: '<': signed/unsigned mismatch
-  Generating Code...
+﻿  Source.cpp
   Binary Search Tree.vcxproj -> C:\Users\joeka\Documents\School Folder\Subjects\ADS\Week 7\Assessment 3 Joseph Kallman\Binary Search Tree\Debug\Binary Search Tree.exe

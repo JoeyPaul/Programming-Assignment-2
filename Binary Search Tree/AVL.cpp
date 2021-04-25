@@ -140,7 +140,7 @@ StudentNode* AVL::insertAVL(StudentNode* parent, StudentNode* newStudent)
 
 void AVL::insert(StudentNode* newStudent)
 {
-    cout << "Inserting " << newStudent->name << " " << newStudent->studentID << endl;
+    //cout << "Inserting " << newStudent->name << " " << newStudent->studentID << endl;
     root = insertAVL(root, newStudent);
-    cout << endl;
+    //cout << endl;
 }
